@@ -8,11 +8,12 @@
   </head>
   <body>
     <div class="gameboard">
-      <div id="celeste" class="color celeste"></div>
-      <div id="violeta" class="color violeta "></div>
-      <button id="btnEmpezar"type="button" name="button" onclick="empezarJuego()">Presiona para jugar</button>
-      <div id="naranja" class="color naranja"></div>
-      <div id="verde" class="color verde"></div>
+      <!-- el data-color nos srive para agregarle datos al evento del click en data-set en target -->
+      <div id="celeste" class="color celeste" data-color="celeste"></div>
+      <div id="violeta" class="color violeta " data-color="violeta"></div>
+      <button id="btnEmpezar"type="button" name="button" onclick="empezarJuego()" >Presiona para jugar</button>
+      <div id="naranja" class="color naranja" data-color="naranja"></div>
+      <div id="verde" class="color verde" data-color="verde"></div>
 
     </div>
   <script type="text/javascript" src="simonDice.js">

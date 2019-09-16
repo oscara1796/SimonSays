@@ -4,7 +4,7 @@ const violeta = document.getElementById('violeta');
 const naranja = document.getElementById('naranja');
 const verde = document.getElementById('verde');
 const btnEmpezar = document.getElementById('btnEmpezar');
-const ULTIMO_NIVEL = 10;
+const ULTIMO_NIVEL = 3;
 
 
 class Juego{
@@ -116,19 +116,20 @@ class Juego{
       this.subNivel++
       console.log(this.subNivel);
       if (this.subNivel === this.nivel) {
-          swal(`Felicidades`,`Avanzas al nivel ${this.nivel++}`)
+        this.nivel++
+        this.eliminarEventosClick();
+        if (this.nivel === (ULTIMO_NIVEL+1)) {
+          this.ganoElJuego()
+        }else{
+          swal(`Felicidades`,`Avanzas al nivel ${this.nivel}`)
             .then(()=>{
-              // this.nivel++
-
-            this.eliminarEventosClick();
-            if (this.nivel === (ULTIMO_NIVEL+1)) {
-              this.ganoElJuego()
-            }else{
               setTimeout(this.siguienteNivel, 1500)
-            }
             })
+          }
 
-      }
+        }
+
+
     }else{
       this.perdioElJuego()
     }

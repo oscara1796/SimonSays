@@ -90,3 +90,14 @@ button:active {
 .hide{
   display: none;
 }
+
+.swal-title{
+  font-size: 70px;
+}
+
+.swal-text{
+  font-size: 50px;
+  display: block;
+  margin: 22px;
+  text-align: center;
+}

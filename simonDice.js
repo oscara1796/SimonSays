@@ -9,6 +9,7 @@ const ULTIMO_NIVEL = 10;
 
 class Juego{
   constructor(){
+    this.inicializar= this.inicializar.bind(this)
     this.inicializar();
     this.generarSecuencia();
     setTimeout(this.siguienteNivel, 500)
@@ -17,7 +18,7 @@ class Juego{
   inicializar(){
     this.siguienteNivel = this.siguienteNivel.bind(this)
     this.elegirColor = this.elegirColor.bind(this)
-    btnEmpezar.classList.add('hide')
+    this.toggleBtnEmpezar()
     this.nivel=1
     this.colores ={
       celeste,
@@ -26,6 +27,17 @@ class Juego{
       verde
     }
   }
+
+  toggleBtnEmpezar(){
+    if (btnEmpezar.classList.contains('hide')) {
+      btnEmpezar.classList.remove('hide')
+    }else{
+      btnEmpezar.classList.add('hide')
+    }
+
+  }
+
+
   generarSecuencia(){
     //Se pueden crear arrays y se la pasa de para metro el numero de elementos
     // de esta forma con new arrays con el metodo fill se llena el array con 0
@@ -104,19 +116,35 @@ class Juego{
       this.subNivel++
       console.log(this.subNivel);
       if (this.subNivel === this.nivel) {
-        this.nivel++;
+          swal(`Felicidades`,`Avanzas al nivel ${this.nivel++}`)
+            .then(()=>{
+              // this.nivel++
 
-        this.eliminarEventosClick();
-        if (this.nivel === (ULTIMO_NIVEL+1)) {
-          //Gano!
-        }else{
-          setTimeout(this.siguienteNivel, 1500)
-        }
+            this.eliminarEventosClick();
+            if (this.nivel === (ULTIMO_NIVEL+1)) {
+              this.ganoElJuego()
+            }else{
+              setTimeout(this.siguienteNivel, 1500)
+            }
+            })
+
       }
     }else{
-      //Perdió
+      this.perdioElJuego()
     }
 }
+
+    ganoElJuego(){
+      swal("Ganaste el juego", "Felicidades!", "success")
+            .then(this.inicializar)
+    }
+    perdioElJuego(){
+      swal("GG Perdiste el juego", "Lo lamentamos =(", "error")
+            .then(()=>{
+              this.eliminarEventosClick()
+              this.inicializar()
+            })
+    }
 }
 
 function empezarJuego(){
